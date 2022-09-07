@@ -8,7 +8,6 @@ class ExploreScreen extends StatefulWidget {
   State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
-
 class _ExploreScreenState extends State<ExploreScreen> {
   final List _exploreItems = [];
   @override
@@ -36,8 +35,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
               height: 40,
             ),
             GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context, index){
-                  return 
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return const SizedBox();
                 })
           ],
         ),
@@ -55,6 +56,6 @@ class ExploreCard extends StatelessWidget {
   }
 }
 
-class ExploreItems{
-  final String eventName;
+class ExploreItems {
+  // final String eventName;
 }

@@ -63,10 +63,7 @@ packages:
       name: fake_async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.3.1"
-=======
-    version: "1.3.0"
   ffi:
     dependency: transitive
     description:
@@ -81,7 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
->>>>>>> 76142de31bde61ac2fd6837ba5d11a45c60d4202
   flutter:
     dependency: "direct main"
     description: flutter
@@ -180,10 +176,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.8.2"
-=======
-    version: "1.8.1"
   path_provider:
     dependency: transitive
     description:
@@ -254,7 +247,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
->>>>>>> 76142de31bde61ac2fd6837ba5d11a45c60d4202
   riverpod:
     dependency: transitive
     description:
@@ -315,10 +307,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.4.12"
-=======
-    version: "0.4.9"
   typed_data:
     dependency: transitive
     description:
@@ -326,7 +315,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.1"
->>>>>>> 76142de31bde61ac2fd6837ba5d11a45c60d4202
   vector_math:
     dependency: transitive
     description:

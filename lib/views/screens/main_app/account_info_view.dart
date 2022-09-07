@@ -5,8 +5,10 @@ class AccountInfoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           //
           Text("I dont even know what should be here")

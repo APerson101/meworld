@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meworld/views/screens/main_app/dashboard_view.dart';
 import 'package:meworld/views/screens/main_app/navigation/bottom_nav_container.dart';
+import 'package:meworld/views/screens/main_app/profile_view.dart';
 import 'package:meworld/views/screens/main_app/search_view.dart';
 
 class MainAppView extends StatefulWidget {
@@ -21,9 +22,7 @@ class _MainAppViewState extends State<MainAppView> {
       const Center(
         child: Text('Notifications'),
       ),
-      const Center(
-        child: Text('Profile'),
-      ),
+      const ProfileView(),
     ];
     return Scaffold(
       body: items[_currentPage],

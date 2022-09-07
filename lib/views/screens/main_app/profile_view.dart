@@ -27,7 +27,7 @@ class ProfileView extends StatelessWidget {
         const Divider(),
         ElevatedButton(
             onPressed: () {
-              GoRouter.of(context).replace('/Login');
+              GoRouter.of(context).replace('/');
             },
             child: const Text("Logout")),
         ElevatedButton(
@@ -35,34 +35,37 @@ class ProfileView extends StatelessWidget {
               await showDialog(
                   context: context,
                   builder: (context) {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      height: 300,
-                      child: Column(children: [
-                        const Text(
-                            'A reset email would be sent to ******@gmail.com. Continue ?'),
-                        const Divider(),
-                        ButtonBar(
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  GoRouter.of(context).pop();
-                                },
-                                child: const Text("Cancel")),
-                            ElevatedButton(
-                                onPressed: () {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                          content: ListTile(
-                                    leading: Icon(Icons.info),
-                                    title: Text(
-                                        "A reset email has been sent to stuff, do stuff with it"),
-                                  )));
-                                },
-                                child: const Text("Continue"))
-                          ],
-                        )
-                      ]),
+                    return Center(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: 300,
+                        child: Column(children: [
+                          const Text(
+                              'A reset email would be sent to ******@gmail.com. Continue ?'),
+                          const Divider(),
+                          ButtonBar(
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Cancel")),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                            content: ListTile(
+                                      leading: Icon(Icons.info),
+                                      title: Text(
+                                          "A reset email has been sent to stuff, do stuff with it"),
+                                    )));
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Continue"))
+                            ],
+                          )
+                        ]),
+                      ),
                     );
                   });
             },
