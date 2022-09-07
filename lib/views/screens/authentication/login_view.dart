@@ -51,33 +51,30 @@ class LoginView extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 150,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    // Login button: validate detail
-                    GoRouter.of(context).go('/MainApp');
-                  },
-                  child: const Text("Login")),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    // Login button: validate detail
-                    GoRouter.of(context).push('/SignUp');
-                  },
-                  child: const Text("Sign Up with gmail")),
-            ),
-          ),
+          ElevatedButton(
+              onPressed: () {
+                // Login button: validate detail
+                GoRouter.of(context).go('/MainApp');
+              },
+              child: const Text("Login")),
+          ElevatedButton(
+              onPressed: () {
+                // Login button: validate detail
+                GoRouter.of(context).push('/SignUp');
+              },
+              child: const Text("Sign Up with gmail")),
+          ElevatedButton(
+              onPressed: () {
+                // Login button: validate detail
+                GoRouter.of(context).push('/ResetPassword');
+              },
+              child: const Text("Reset Password")),
+          ElevatedButton(
+              onPressed: () {
+                // Login button: validate detail
+                GoRouter.of(context).push('/ResetPassword');
+              },
+              child: const Text("Reset Password")),
         ],
       ),
     );
