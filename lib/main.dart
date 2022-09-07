@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meworld/views/screens/authentication/login_view.dart';
+import 'package:meworld/views/screens/authentication/reset_password_view.dart';
 import 'package:meworld/views/screens/authentication/signup_view.dart';
 import 'package:meworld/views/screens/main_app/main_app_view.dart';
 import 'package:meworld/views/screens/main_app/settings_view.dart';
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
       GoRoute(
           path: '/AccountInfo',
           builder: (context, state) => const AccountInfoView()),
+      GoRoute(
+          path: '/ResetPassword',
+          builder: (context, state) => ResetPasswordView()),
     ],
   );
 }
