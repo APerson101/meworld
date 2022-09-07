@@ -103,15 +103,10 @@ class _DashboardViewState extends State<DashboardView> {
                 ),
                 const DashBoardCards(
                     title: 'Health', icon: Icons.health_and_safety),
-                const DashBoardCards(
-                    title: 'Sports', icon: Icons.sports_baseball_rounded),
-                const DashBoardCards(title: 'Artisans', icon: Icons.settings),
-                const DashBoardCards(
-                    title: 'Health', icon: Icons.health_and_safety),
                 DashBoardCards(
                   title: 'Sports',
                   icon: Icons.sports_baseball_rounded,
-                  onPressed: () => GoRouter.of(context).go('/Sports'),
+                  onPressed: () => GoRouter.of(context).push('/Sports'),
                 ),
                 const DashBoardCards(
                     title: 'Freelancer', icon: Icons.engineering),

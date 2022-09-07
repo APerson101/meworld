@@ -36,6 +36,8 @@ class _ArtisanDetailsState extends State<ArtisanDetails> {
       default:
     }
     return Scaffold(
+      backgroundColor:
+          _pageState >= 1 ? Colors.blueGrey.withOpacity(0.5) : Colors.white,
       appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
@@ -57,80 +59,94 @@ class _ArtisanDetailsState extends State<ArtisanDetails> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    leading: widget.artisans.picture,
-                    title: Text(widget.artisans.name),
-                    subtitle: Text(widget.artisans.age),
-                  ),
-                  Text(
-                    widget.artisans.description,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Reviews:'),
-                      Text('View All'),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    children: [
-                      ...reviews.map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.only(bottom: 14),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            elevation: 10,
-                            child: ListTile(
+            GestureDetector(
+              onTap: (() {
+                setState(() {
+                  _pageState = 0;
+                });
+              }),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      leading: widget.artisans.picture,
+                      title: Text(widget.artisans.name),
+                      subtitle: Text(widget.artisans.age),
+                    ),
+                    Text(
+                      widget.artisans.description,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text('Reviews:'),
+                        Text('View All'),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      children: [
+                        ...reviews.map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: Card(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
-                              leading: e.picture,
-                              title: Text(e.name),
-                              subtitle: Text(e.description),
-                              trailing: RatingBar(
-                                maxRating: 5,
-                                initialRating: e.rating,
-                                onRatingUpdate: (double value) {},
-                                itemSize: 11,
-                                glowColor: Colors.amber,
-                                unratedColor: Colors.grey,
-                                direction: Axis.horizontal,
-                                ignoreGestures: true,
-                                ratingWidget: RatingWidget(
-                                  full: const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                              elevation: 10,
+                              child: ListTile(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                leading: e.picture,
+                                title: Text(e.name),
+                                subtitle: Text(e.description),
+                                trailing: RatingBar(
+                                  maxRating: 5,
+                                  initialRating: e.rating,
+                                  onRatingUpdate: (double value) {},
+                                  itemSize: 11,
+                                  glowColor: Colors.amber,
+                                  unratedColor: Colors.grey,
+                                  direction: Axis.horizontal,
+                                  ignoreGestures: true,
+                                  ratingWidget: RatingWidget(
+                                    full: const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    empty: const Icon(Icons.star),
+                                    half: const Icon(Icons.star),
                                   ),
-                                  empty: const Icon(Icons.star),
-                                  half: const Icon(Icons.star),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             AnimatedContainer(
-              color: Colors.amber,
-              duration: const Duration(seconds: 1),
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24))),
+              duration: const Duration(
+                milliseconds: 500,
+              ),
               transform: Matrix4.translationValues(0, _expanded, 0),
               width: double.infinity,
               padding: const EdgeInsets.all(24),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const MeWordTextFormField(
                     label: 'Duration',
@@ -148,12 +164,16 @@ class _ArtisanDetailsState extends State<ArtisanDetails> {
                       label: 'Date',
                       textfield: GestureDetector(
                           onTap: () => showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: (DateTime(DateTime.now().year,
-                                      DateTime.now().month, 30)))
-                              .then((value) => value = dateTime),
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime.now(),
+                                      lastDate: (DateTime(DateTime.now().year,
+                                          DateTime.now().month, 30)))
+                                  .then((value) {
+                                setState(() {
+                                  value = dateTime;
+                                });
+                              }),
                           child: Text(dateTime.toString()))),
                 ],
               ),
