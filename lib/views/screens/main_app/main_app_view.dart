@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meworld/views/screens/main_app/dashboard_view.dart';
 import 'package:meworld/views/screens/main_app/navigation/bottom_nav_container.dart';
+import 'package:meworld/views/screens/main_app/notifications_view.dart';
 import 'package:meworld/views/screens/main_app/profile_view.dart';
 import 'package:meworld/views/screens/main_app/search_view.dart';
 
@@ -19,9 +20,7 @@ class _MainAppViewState extends State<MainAppView> {
     List<Widget> items = [
       const DashboardView(),
       const ExploreScreen(),
-      const Center(
-        child: Text('Notifications'),
-      ),
+      const NotificationsView(),
       const ProfileView(),
     ];
     return Scaffold(

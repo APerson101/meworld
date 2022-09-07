@@ -61,7 +61,7 @@ class _DashboardViewState extends State<DashboardView> {
                       height: 30,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
@@ -126,31 +126,40 @@ class WalletBalanceWidgets extends StatelessWidget {
       onTap: () {},
       behavior: HitTestBehavior.translucent,
       child: Container(
-        height: 60,
+        height: 55,
         width: 80,
         decoration: BoxDecoration(
           color: Colors.green,
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Icon(icon), Text(title)]),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(
+            icon,
+            color: Colors.white,
+          ),
+          Text(
+            title,
+            style: const TextStyle(color: Colors.white),
+          )
+        ]),
       ),
     );
   }
 }
 
 class DashBoardCards extends StatelessWidget {
-  const DashBoardCards({Key? key, required this.title, required this.icon})
+  const DashBoardCards(
+      {Key? key, required this.title, required this.icon, this.onPressed})
       : super(key: key);
   final String title;
   final IconData icon;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () {},
+      onTap: onPressed,
       behavior: HitTestBehavior.translucent,
       child: Container(
         height: size.height / 6,

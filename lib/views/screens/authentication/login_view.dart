@@ -8,10 +8,17 @@ class LoginView extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Login'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 40,
+          ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextFormField(
@@ -25,7 +32,7 @@ class LoginView extends StatelessWidget {
                 return 'No email was entered';
               },
               decoration: InputDecoration(
-                helperText: 'Enter email',
+                hintText: 'Enter email',
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               ),
@@ -38,24 +45,39 @@ class LoginView extends StatelessWidget {
               controller: _passwordController,
               onChanged: (password) {},
               decoration: InputDecoration(
-                helperText: 'Enter Password',
+                hintText: 'Enter Password',
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                // Login button: validate detail
-                GoRouter.of(context).go('/MainApp');
-              },
-              child: const Text("Login")),
-          ElevatedButton(
-              onPressed: () {
-                // Login button: validate detail
-                GoRouter.of(context).push('/SignUp');
-              },
-              child: const Text("Sign Up with gmail")),
+          const SizedBox(
+            height: 150,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                  onPressed: () {
+                    // Login button: validate detail
+                    GoRouter.of(context).go('/MainApp');
+                  },
+                  child: const Text("Login")),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                  onPressed: () {
+                    // Login button: validate detail
+                    GoRouter.of(context).push('/SignUp');
+                  },
+                  child: const Text("Sign Up with gmail")),
+            ),
+          ),
         ],
       ),
     );
