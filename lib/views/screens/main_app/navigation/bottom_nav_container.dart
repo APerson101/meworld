@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:routelift/src/features/navigation/navigator.dart';
-import 'package:routelift/src/features/navigation/routes.dart';
-import 'package:routelift/src/features/send_package/presentation/screens/pickup_details/pickup_details.dart';
-import 'package:routelift/src/shared/utils/utils.dart';
+import 'package:meworld/views/screens/main_app/navigation/navigator.dart';
+import 'package:meworld/views/screens/main_app/navigation/routes.dart';
 
-enum BottomNav { home, delivery, reports, profile }
+enum BottomNav { home, explore, notification, profile }
 
 class BottomNavigationContainer extends StatefulWidget {
   const BottomNavigationContainer({
@@ -13,7 +10,7 @@ class BottomNavigationContainer extends StatefulWidget {
     required this.currentNav,
   }) : super(key: key);
 
-  final BottomNav currentNav;
+  final int currentNav;
 
   @override
   State<BottomNavigationContainer> createState() =>
@@ -26,9 +23,7 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = BottomNavItem.bottomNavItems.indexWhere(
-      (bottomNav) => bottomNav.nav == widget.currentNav,
-    );
+    _selectedIndex = widget.currentNav;
   }
 
   @override
@@ -50,13 +45,13 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
       items: [
         ...BottomNavItem.bottomNavItems.map(
           (item) => BottomNavigationBarItem(
-            icon: SvgPicture.asset(
+            icon: Icon(
               item.asset,
-              color: appColors.grey500,
+              color: Colors.grey,
             ),
-            activeIcon: SvgPicture.asset(
-              item.activeAsset,
-              color: appColors.purple,
+            activeIcon: Icon(
+              item.asset,
+              color: Colors.purple,
             ),
             label: item.label,
           ),
@@ -76,43 +71,43 @@ class BottomNavItem {
   });
 
   final String label;
-  final String asset;
+  final IconData asset;
   final String activeAsset;
   final BottomNav nav;
   final Widget body;
 
   static final bottomNavItems = <BottomNavItem>[
-    BottomNavItem(
+    const BottomNavItem(
       label: 'Home',
-      activeAsset: icHome,
-      asset: icHome,
+      activeAsset: 'Home',
+      asset: Icons.home,
       nav: BottomNav.home,
-      body: const PickupDetails(),
+      body: Center(child: Text('data')),
     ),
-    BottomNavItem(
-      label: 'Delivery',
-      activeAsset: icDelivery,
-      asset: icDelivery,
-      nav: BottomNav.delivery,
-      body: const Center(
-        child: Text('Delivery'),
+    const BottomNavItem(
+      label: 'Explore',
+      activeAsset: 'Explore',
+      asset: Icons.search,
+      nav: BottomNav.explore,
+      body: Center(
+        child: Text('Explore'),
       ),
     ),
-    BottomNavItem(
-      label: 'Reports',
-      activeAsset: icReports,
-      asset: icReports,
-      nav: BottomNav.reports,
-      body: const Center(
-        child: Text('Reports'),
+    const BottomNavItem(
+      label: 'Notifications',
+      activeAsset: 'Notifications',
+      asset: Icons.notifications,
+      nav: BottomNav.notification,
+      body: Center(
+        child: Text('Notifications'),
       ),
     ),
-    BottomNavItem(
+    const BottomNavItem(
       label: 'Profile',
-      activeAsset: icProfile,
-      asset: icProfile,
+      activeAsset: 'Profile',
+      asset: Icons.person,
       nav: BottomNav.profile,
-      body: const Center(
+      body: Center(
         child: Text('Profile'),
       ),
     ),

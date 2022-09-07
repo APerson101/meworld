@@ -1,18 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:routelift/src/app_injection_container.dart';
-import 'package:routelift/src/features/auth/auth.dart';
-import 'package:routelift/src/features/auth/presentation/providers/auth_provider.dart';
-import 'package:routelift/src/features/navigation/bottom_nav_container.dart';
-import 'package:routelift/src/features/navigation/routes.dart';
+import 'package:meworld/views/screens/main_app/navigation/bottom_nav_container.dart';
+import 'package:meworld/views/screens/main_app/navigation/routes.dart';
 
 final appBaseRouter = AppBaseRouter(
-  appRouters: [
-    AuthRouter(),
-  ],
-  authProvider: sl<AuthProvider>(),
+  appRouters: [],
 ).router;
 
 ///arg regitry
@@ -27,11 +19,9 @@ T argsRegistry<T>(String key, Object? args) {
 class AppBaseRouter {
   AppBaseRouter({
     required this.appRouters,
-    required this.authProvider,
   });
 
   final List<AppRouter> appRouters;
-  final AuthProvider authProvider;
 
   GoRouter get router {
     return GoRouter(
@@ -39,22 +29,10 @@ class AppBaseRouter {
       urlPathStrategy: UrlPathStrategy.path,
       routes: getRoutes,
       redirect: (state) {
-        if (authProvider.authStatus == AuthStatus.unauthenticated &&
-            state.location.startsWith('/nav')) {
-          log("h");
+        if (state.location.startsWith('/nav')) {
           return AuthRoutes.login.path;
         }
-
-        if (authProvider.firstTimeUser == false &&
-            state.location.startsWith('/onboadingScreen')) {
-          return AuthRoutes.login.path;
-        }
-
-        if (authProvider.authStatus == AuthStatus.authenticated &&
-            state.location == AuthRoutes.login.path) {
-          return AppRoutes.tab(bottomNavTab: BottomNav.home).path;
-        }
-        return null;
+        return AppRoutes.tab(bottomNavTab: BottomNav.home).path;
       },
       navigatorBuilder: (context, state, child) {
         if (RegExp(r'^/nav/[a-zA-Z0-9]+$').hasMatch(state.location)) {
