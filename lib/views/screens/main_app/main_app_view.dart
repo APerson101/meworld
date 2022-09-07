@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:meworld/views/screens/main_app/dashboard_view.dart';
 import 'package:meworld/views/screens/main_app/navigation/bottom_nav_container.dart';
+import 'package:meworld/views/screens/main_app/search_view.dart';
 
-class MeWorldBottomAppBAr extends StatefulWidget {
-  const MeWorldBottomAppBAr({Key? key}) : super(key: key);
+class MainAppView extends StatefulWidget {
+  const MainAppView({Key? key}) : super(key: key);
 
   @override
-  State<MeWorldBottomAppBAr> createState() => _MeWorldBottomAppBArState();
+  State<MainAppView> createState() => _MainAppViewState();
 }
 
-class _MeWorldBottomAppBArState extends State<MeWorldBottomAppBAr> {
+class _MainAppViewState extends State<MainAppView> {
   int _currentPage = 0;
   BottomNavItem? bottomNavItem;
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      const Center(
-        child: Text('Home'),
-      ),
-      const Center(
-        child: Text('Explore'),
-      ),
+      const DashboardView(),
+      const ExploreScreen(),
       const Center(
         child: Text('Notifications'),
       ),
@@ -33,6 +31,7 @@ class _MeWorldBottomAppBArState extends State<MeWorldBottomAppBAr> {
         currentIndex: _currentPage,
         onTap: (index) {
           _currentPage = index;
+          setState(() {});
         },
         type: BottomNavigationBarType.fixed,
         selectedFontSize: 12,
