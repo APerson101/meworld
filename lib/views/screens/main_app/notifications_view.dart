@@ -19,18 +19,16 @@ class _Notifications extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: ListView(children: [
-        ...List.generate(
-            10,
-            (index) => Card(
-                  child: ListTile(
-                    onTap: () {},
-                    leading: const Icon(Icons.notifications),
-                    title: const Text("You have a new message from Body Gym"),
-                  ),
-                ))
-      ]),
-    );
+    return ListView(children: [
+      ...List.generate(
+          10,
+          (index) => Card(
+                child: ListTile(
+                  onTap: () {},
+                  leading: const Icon(Icons.notifications),
+                  title: const Text("You have a new message from Body Gym"),
+                ),
+              ))
+    ]);
   }
 }
