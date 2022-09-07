@@ -69,12 +69,6 @@ class LoginView extends StatelessWidget {
                 GoRouter.of(context).push('/ResetPassword');
               },
               child: const Text("Reset Password")),
-          ElevatedButton(
-              onPressed: () {
-                // Login button: validate detail
-                GoRouter.of(context).push('/ResetPassword');
-              },
-              child: const Text("Reset Password")),
         ],
       ),
     );
