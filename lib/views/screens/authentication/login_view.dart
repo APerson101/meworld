@@ -47,9 +47,15 @@ class LoginView extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 // Login button: validate detail
-                GoRouter.of(context).go('Main App');
+                GoRouter.of(context).go('/MainApp');
               },
-              child: const Text("Login"))
+              child: const Text("Login")),
+          ElevatedButton(
+              onPressed: () {
+                // Login button: validate detail
+                GoRouter.of(context).push('/SignUp');
+              },
+              child: const Text("Sign Up with gmail")),
         ],
       ),
     );
