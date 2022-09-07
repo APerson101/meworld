@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
@@ -92,13 +93,21 @@ class _DashboardViewState extends State<DashboardView> {
               spacing: 10,
               runSpacing: 10,
               alignment: WrapAlignment.center,
-              children: const [
-                DashBoardCards(title: 'Artisans', icon: Icons.settings),
-                DashBoardCards(title: 'Health', icon: Icons.health_and_safety),
+              children: [
                 DashBoardCards(
+                  title: 'Artisans',
+                  icon: Icons.settings,
+                  onPressed: () {
+                    GoRouter.of(context).push('/artisanCategory');
+                  },
+                ),
+                const DashBoardCards(
+                    title: 'Health', icon: Icons.health_and_safety),
+                const DashBoardCards(
                     title: 'Sports', icon: Icons.sports_baseball_rounded),
-                DashBoardCards(title: 'Freelancer', icon: Icons.engineering),
-                DashBoardCards(
+                const DashBoardCards(
+                    title: 'Freelancer', icon: Icons.engineering),
+                const DashBoardCards(
                   title: 'Logistics',
                   icon: Icons.car_rental,
                 ),

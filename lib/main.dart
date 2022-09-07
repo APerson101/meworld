@@ -5,6 +5,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meworld/views/screens/authentication/login_view.dart';
 import 'package:meworld/views/screens/authentication/reset_password_view.dart';
 import 'package:meworld/views/screens/authentication/signup_view.dart';
+import 'package:meworld/views/screens/main_app/artisans/artisan_details.dart';
+import 'package:meworld/views/screens/main_app/artisans/category.dart';
+import 'package:meworld/views/screens/main_app/artisans/category_details.dart';
 import 'package:meworld/views/screens/main_app/main_app_view.dart';
 import 'package:meworld/views/screens/main_app/settings_view.dart';
 
@@ -46,8 +49,23 @@ class MyApp extends StatelessWidget {
           path: '/AccountInfo',
           builder: (context, state) => const AccountInfoView()),
       GoRoute(
-          path: '/ResetPassword',
-          builder: (context, state) => ResetPasswordView()),
+        path: '/ResetPassword',
+        builder: (context, state) => ResetPasswordView(),
+      ),
+      GoRoute(
+        path: '/artisanCategory',
+        builder: (context, state) => const ArtisanCategories(),
+      ),
+      GoRoute(
+        path: '/artisanCategory/categoryDetails',
+        builder: (context, state) => const ArtisanCategoryDetails(),
+      ),
+      GoRoute(
+        path: '/artisanCategory/categoryDetails/artisanDetails',
+        builder: (context, state) => ArtisanDetails(
+          artisans: state.extra as Artisans,
+        ),
+      ),
     ],
   );
 }
