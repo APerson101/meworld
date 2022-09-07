@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:routelift/src/features/navigation/bottom_nav_container.dart';
-import 'package:routelift/src/features/splash/splash_screen.dart';
+import 'package:meworld/views/screens/main_app/navigation/bottom_nav_container.dart';
 
 class AppRoutes {
   static AppRoute splash = AppRoute(
     name: 'splash',
     path: '/splash',
-    builder: (_, __) => const SplashScreen(),
+    builder: (_, __) => const SizedBox(),
   );
   static AppRoute tab({BottomNav? bottomNavTab}) {
     return AppRoute(
@@ -16,9 +15,7 @@ class AppRoutes {
         builder: (context, state) {
           final tabName = state.params['name'];
           final bottomNav = BottomNav.values.byName(tabName!);
-
           final navItems = BottomNavItem.bottomNavItems;
-
           return IndexedStack(
             key: ValueKey(tabName),
             index: bottomNav.index,
