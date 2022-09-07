@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +10,7 @@ class SportsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(child: SportsEventsLoadingView());
+    return const Scaffold(body: SafeArea(child: SportsEventsLoadingView()));
   }
 }
 
@@ -20,7 +22,7 @@ class SportsEventsLoadingView extends ConsumerWidget {
     return ref.watch(loadSportsEventProvider).when(
         data: (events) => _SportsEventView(events: events),
         error: (er, sr) {
-          print(sr.toString());
+          log(sr.toString());
           return const Center(child: Text("Unknown Error"));
         },
         loading: () => const Material(
@@ -38,7 +40,10 @@ class _SportsEventView extends ConsumerWidget {
       child: Column(
         children: [
           ListTile(
-              leading: const FlutterLogo(),
+              title: const FlutterLogo(),
+              leading: BackButton(
+                onPressed: () => GoRouter.of(context).pop(),
+              ),
               trailing: SizedBox(
                 width: 200,
                 child: ButtonBar(
@@ -47,7 +52,7 @@ class _SportsEventView extends ConsumerWidget {
                         onPressed: () {}, child: const Text("create event")),
                     IconButton(
                         onPressed: () {
-                          GoRouter.of(context).go('/SportsSearch');
+                          GoRouter.of(context).push('/SportsSearch');
                         },
                         icon: const Icon(Icons.search))
                   ],
@@ -94,7 +99,7 @@ class _SportsEventView extends ConsumerWidget {
           ),
           ...events
               .map((event) => SizedBox(
-                  height: 100,
+                  height: 150,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -114,7 +119,7 @@ class _SportsEventView extends ConsumerWidget {
 }
 
 final loadSportsEventProvider = FutureProvider((ref) async {
-  return Future.delayed(const Duration(seconds: 2), () {
+  return Future.delayed(const Duration(seconds: 1), () {
     return List.generate(
         20,
         (index) => SportsEvent(

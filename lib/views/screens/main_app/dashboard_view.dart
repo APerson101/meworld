@@ -94,13 +94,19 @@ class _DashboardViewState extends State<DashboardView> {
               runSpacing: 10,
               alignment: WrapAlignment.center,
               children: [
-                const DashBoardCards(title: 'Artisans', icon: Icons.settings),
+                DashBoardCards(
+                  title: 'Artisans',
+                  icon: Icons.settings,
+                  onPressed: () {
+                    GoRouter.of(context).push('/artisanCategory');
+                  },
+                ),
                 const DashBoardCards(
                     title: 'Health', icon: Icons.health_and_safety),
                 DashBoardCards(
                   title: 'Sports',
                   icon: Icons.sports_baseball_rounded,
-                  onPressed: () => GoRouter.of(context).go('/Sports'),
+                  onPressed: () => GoRouter.of(context).push('/Sports'),
                 ),
                 const DashBoardCards(
                     title: 'Freelancer', icon: Icons.engineering),

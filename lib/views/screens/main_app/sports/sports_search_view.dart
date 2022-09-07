@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SportsSearchView extends StatelessWidget {
   const SportsSearchView({Key? key}) : super(key: key);
@@ -14,7 +15,9 @@ class SportsSearchView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const BackButton(),
+                BackButton(
+                  onPressed: (() => GoRouter.of(context).pop()),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
