@@ -11,54 +11,56 @@ class ResetPasswordView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+        appBar: AppBar(),
         body: Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          TextFormField(
-              onChanged: (enteredText) {
-                enteredText.isNotEmpty
-                    ? ref.watch(isProcessing.notifier).state = true
-                    : ref.watch(isProcessing.notifier).state = false;
-              },
-              validator: (email) {
-                return email != null
-                    ? email.isNotEmpty
-                        ? EmailValidator.validate(email)
-                            ? null
-                            : 'Invalid Email Entered'
-                        : 'No email Entered'
-                    : null;
-              },
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: ref.watch(isProcessing)
-                          ? const Icon(Icons.cancel)
-                          : const CircularProgressIndicator.adaptive()),
-                  helperText: "Enter Email Address",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)))),
-          ElevatedButton(
-              onPressed: () {
-                _formKey.currentState!.validate()
-                    ? {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                                content: ListTile(
-                          leading: Text("Reset"),
-                          title: Text(
-                              "A reset link has been sent to asfas@gmail.com"),
-                        ))),
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const _EnterCodeView()))
-                      }
-                    : null;
-              },
-              child: const Text("Reset"))
-        ],
-      ),
-    ));
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                  onChanged: (enteredText) {
+                    enteredText.isNotEmpty
+                        ? ref.watch(isProcessing.notifier).state = true
+                        : ref.watch(isProcessing.notifier).state = false;
+                  },
+                  validator: (email) {
+                    return email != null
+                        ? email.isNotEmpty
+                            ? EmailValidator.validate(email)
+                                ? null
+                                : 'Invalid Email Entered'
+                            : 'No email Entered'
+                        : null;
+                  },
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: ref.watch(isProcessing)
+                              ? const Icon(Icons.cancel)
+                              : const CircularProgressIndicator.adaptive()),
+                      helperText: "Enter Email Address",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)))),
+              ElevatedButton(
+                  onPressed: () {
+                    _formKey.currentState!.validate()
+                        ? {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    content: ListTile(
+                              leading: Text("Reset"),
+                              title: Text(
+                                  "A reset link has been sent to asfas@gmail.com"),
+                            ))),
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const _EnterCodeView()))
+                          }
+                        : null;
+                  },
+                  child: const Text("Reset"))
+            ],
+          ),
+        ));
   }
 }
 
@@ -119,7 +121,7 @@ class _EnterNewPasswordView extends ConsumerWidget {
           ElevatedButton(
               onPressed: () {
                 Future.delayed(const Duration(seconds: 1),
-                    () => GoRouter.of(context).replace('/'));
+                    () => GoRouter.of(context).go('/'));
               },
               child: ref.watch(loadingState)
                   ? const CircularProgressIndicator.adaptive()
