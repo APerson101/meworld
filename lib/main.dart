@@ -10,6 +10,8 @@ import 'package:meworld/views/screens/main_app/artisans/category.dart';
 import 'package:meworld/views/screens/main_app/artisans/category_details.dart';
 import 'package:meworld/views/screens/main_app/main_app_view.dart';
 import 'package:meworld/views/screens/main_app/settings_view.dart';
+import 'package:meworld/views/screens/main_app/sports/sports_search_view.dart';
+import 'package:meworld/views/screens/main_app/sports/sports_view.dart';
 
 import 'views/screens/main_app/account_info_view.dart';
 
@@ -35,6 +37,10 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/',
         builder: (context, state) => LoginView(),
+      ),
+      GoRoute(
+        path: '/Sports',
+        builder: (context, state) => const SportsView(),
       ),
       GoRoute(
         path: '/SignUp',
@@ -66,6 +72,9 @@ class MyApp extends StatelessWidget {
           artisans: state.extra as Artisans,
         ),
       ),
+      GoRoute(
+          path: '/SportsSearch',
+          builder: (context, state) => const SportsSearchView()),
     ],
   );
 }
