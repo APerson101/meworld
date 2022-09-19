@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meworld/core/repository/authentication_repo.dart';
+import 'package:meworld/core/services/service_locator.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +27,9 @@ class ProfileView extends StatelessWidget {
             trailing: const Icon(Icons.arrow_forward_ios_outlined)),
         const Divider(),
         ElevatedButton(
-            onPressed: () {
-              GoRouter.of(context).replace('/');
+            onPressed: () async {
+              // await FirebaseAuth.instance.signOut();
+              await sl<AuthenticationRepo>().signOut();
             },
             child: const Text("Logout")),
         ElevatedButton(

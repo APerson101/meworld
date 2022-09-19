@@ -32,7 +32,7 @@ class SportsEventsLoadingView extends ConsumerWidget {
 
 class _SportsEventView extends ConsumerWidget {
   _SportsEventView({Key? key, required this.events}) : super(key: key);
-  final List<SportsEvent> events;
+  final List<SportsEventModel> events;
   final currentChip = StateProvider((ref) => 0);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -122,8 +122,10 @@ final loadSportsEventProvider = FutureProvider((ref) async {
   return Future.delayed(const Duration(seconds: 1), () {
     return List.generate(
         20,
-        (index) => SportsEvent(
+        (index) => SportsEventModel(
             name: 'Event name',
+            eventID: "dsf",
+            creatorID: "sfds",
             location: 'Somewhere in Abuja',
             eventType: SportingEventTypes.oneOff,
             description: 'Match between the boys having fun or something',

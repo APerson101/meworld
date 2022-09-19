@@ -2,12 +2,15 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meworld/core/repository/authentication_repo.dart';
+import 'package:meworld/core/services/service_locator.dart';
 import 'package:password_validated_field/password_validated_field.dart';
 
 class ResetPasswordView extends ConsumerWidget {
   ResetPasswordView({Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey();
   final isProcessing = StateProvider((ref) => false);
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -18,6 +21,7 @@ class ResetPasswordView extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+                  controller: emailController,
                   onChanged: (enteredText) {
                     enteredText.isNotEmpty
                         ? ref.watch(isProcessing.notifier).state = true
@@ -42,19 +46,27 @@ class ResetPasswordView extends ConsumerWidget {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20)))),
               ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     _formKey.currentState!.validate()
-                        ? {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                                    content: ListTile(
-                              leading: Text("Reset"),
-                              title: Text(
-                                  "A reset link has been sent to asfas@gmail.com"),
-                            ))),
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const _EnterCodeView()))
-                          }
+                        ? await sl<AuthenticationRepo>().sendResetEmail(
+                            email: emailController.text,
+                            error: (message) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      content: ListTile(
+                                title: Text(message),
+                              )));
+                            },
+                            success: () {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      content: ListTile(
+                                leading: const Text("Reset"),
+                                title: Text(
+                                    "A reset link has been sent to ${emailController.text}"),
+                              )));
+                              GoRouter.of(context).push('/resetCode');
+                            })
                         : null;
                   },
                   child: const Text("Reset"))
@@ -64,8 +76,10 @@ class ResetPasswordView extends ConsumerWidget {
   }
 }
 
-class _EnterCodeView extends StatelessWidget {
-  const _EnterCodeView({Key? key}) : super(key: key);
+class EnterCodeView extends StatelessWidget {
+  const EnterCodeView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

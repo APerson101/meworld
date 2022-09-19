@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class DashboardView extends StatefulWidget {
+final currentPage = StateProvider((ref) => 0);
+
+class DashboardView extends ConsumerWidget {
   const DashboardView({super.key});
 
   @override
-  State<DashboardView> createState() => _DashboardViewState();
-}
-
-class _DashboardViewState extends State<DashboardView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey.withOpacity(0.4),
+      backgroundColor: Colors.blueGrey.withOpacity(
+        0.4,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 24,
@@ -29,7 +29,7 @@ class _DashboardViewState extends State<DashboardView> {
                 Row(
                   children: const [
                     Text('Welcome, '),
-                    Text('Scammer!'),
+                    Text('John Francis'),
                   ],
                 ),
                 Container(
@@ -53,9 +53,9 @@ class _DashboardViewState extends State<DashboardView> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text('Wallet Balance: '),
-                        Text('\$30 billion'),
+                      children: [
+                        const Text('Wallet Balance: '),
+                        Text('\$ ${ref.watch(walletBalance)} '),
                       ],
                     ),
                     const SizedBox(
@@ -187,3 +187,5 @@ class DashBoardCards extends StatelessWidget {
     );
   }
 }
+
+final walletBalance = StateProvider((ref) => 3000);
