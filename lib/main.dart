@@ -24,6 +24,7 @@ import 'firebase_options.dart';
 import 'views/screens/business forms/gym_form_view.dart';
 import 'views/screens/create_sports_event.dart';
 import 'views/screens/main_app/account_info_view.dart';
+import 'views/screens/main_app/dashboardwidgets/txnswalletview.dart';
 
 // DEBUG=backend:* npm start
 void main() async {
@@ -67,11 +68,11 @@ class MyApp extends ConsumerWidget {
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       fontFamily: GoogleFonts.notoSans().fontFamily,
     );
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      // themeMode: ThemeMode.dark,
-      home: const Landing(),
-    );
+    // return MaterialApp(
+    //   theme: ThemeData.dark(),
+    //   // themeMode: ThemeMode.dark,
+    //   home: const Landing(),
+    // );
 
     return MaterialApp.router(
         themeMode: ThemeMode.system,
@@ -104,6 +105,10 @@ class MyApp extends ConsumerWidget {
       GoRoute(
         path: '/SignUp',
         builder: (context, state) => SignUpView(),
+      ),
+      GoRoute(
+        path: '/walletTxns',
+        builder: (context, state) => const WalletTxnsView(),
       ),
       GoRoute(
         path: '/MainApp',
@@ -161,7 +166,7 @@ class LaunchApp extends ConsumerWidget {
     return user.maybeWhen(
         data: (user) {
           // return user != null ? MainAppViewer() : const Landing();
-          return user != null ? MainAppViewer() : LoginView();
+          return user != null ? MainAppViewer() : const Landing();
         },
         orElse: () => Container());
   }

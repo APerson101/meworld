@@ -58,7 +58,7 @@ export const retrieveWalletBalances = functions.https.onCall(async (request) => 
   const headers = header.getHeader(null, path, "get");
   const userWalletBalance = await ah.getRequest(path, headers);
   console.log(userWalletBalance);
-  return userWalletBalance;
+  return userWalletBalance.data;
 });
 
 export const walletTransferRequest = functions.https.onCall(async (request) => {

@@ -2,7 +2,6 @@
 import 'dart:html';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:meworld/core/repository/rapyd_helper.dart';
@@ -27,7 +26,7 @@ class _IndexVideoCallState extends State<IndexVideoCall> {
       children: [
         ElevatedButton(
             onPressed: () async {
-              var res = await RapydAPI(dio: Dio()).createWallet();
+              var res = await RapydAPI().createWallet({});
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(res.toString())));
             },

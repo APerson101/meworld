@@ -1,67 +1,78 @@
-import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:convert/convert.dart';
-import 'package:crypto/crypto.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:meworld/core/models/rapydwallet.dart';
+import 'package:meworld/core/models/transcatios_model.dart';
 import 'package:meworld/core/services/service_locator.dart';
-import 'package:meworld/core/utils/video_call_settings.dart';
-import 'package:random_string/random_string.dart';
+
+import 'hive_helper.dart';
 
 class RapydAPI {
   String baseURL = 'https://sandboxapi.raphyd.net/v1';
-  RapydAPI({required this.dio});
-  Dio dio;
-  createWallet() async {
+  createWallet(Map<String, String> data) async {
     var walletBody = {
-      'first_name': "TESTER",
-      'last_name': "last",
-      'type': 'person'
+      'first_name': data['first_name'],
+      'last_name': data["last_name"],
+      'type': data['type']
     };
     try {
       var response = await sl<FirebaseFunctions>()
           .httpsCallable('createWallet')
           .call({'body': walletBody});
-      print(response.data);
+      var newWallet = Wallet.fromMap(response.data["data"]);
+      //save to firebase
+      await sl<FirebaseFirestore>()
+          .doc('Users/${data['userid']}')
+          .update({'walletID': newWallet.id});
+      //add to box
+      sl<HiveHelper>().addWalletToBox(newWallet);
+      return true;
     } catch (e) {
+      debugPrint(e.toString());
       return e;
     }
   }
 
-  Future<Map<String, String>> _getHeaders(String httpMethod, String urlPath,
-      {dynamic body = ''}) async {
-    String timeStamp =
-        ((DateTime.now().millisecondsSinceEpoch) / 1000).round().toString();
-    var salt = randomString(randomBetween(8, 16), from: 97, to: 122);
+  loadWalletBalance({required String id}) async {
+    var response = await sl<FirebaseFunctions>()
+        .httpsCallable('retrieveWalletBalances')
+        .call({'eWalletID': id});
 
-    var toSign = httpMethod.toLowerCase() +
-        urlPath +
-        salt +
-        timeStamp +
-        rapydaccesskey +
-        secretKey;
-    if (body.isNotEmpty) toSign += jsonEncode(body);
-    var signature = _getSignature(toSign);
-
-    return {
-      'content-type': 'application/json',
-      'access_key': rapydaccesskey,
-      'timestamp': timeStamp,
-      'salt': salt,
-      'signature': signature
-    };
+    var list = response.data as List;
+    return List.generate(
+      list.length,
+      (index) => WalletBalanceModel.fromMap(
+        list[index],
+      ),
+    );
   }
 
-  _getSignature(String toSign) {
-    var key = ascii.encode(secretKey);
-    var toSign_ = ascii.encode(toSign);
+  fundWallet(
+      {required String id,
+      required String amount,
+      required void Function() success,
+      required void Function() failure}) async {
+    try {
+      var response =
+          await sl<FirebaseFunctions>().httpsCallable('addFundsToWallet').call({
+        'body': {'ewallet': id, 'amount': amount, 'currency': 'USD'}
+      });
 
-    var hmacSha256 = Hmac(sha256, key); // HMAC-SHA256
+      String status = response.data['status']['status'];
+      status == 'SUCCESS' ? success() : failure();
+    } catch (e) {
+      debugPrint(e.toString());
+      failure();
+    }
+  }
 
-    var hmacSha256_ = hmacSha256.convert(toSign_);
-    var ss = hex.encode(hmacSha256_.bytes);
-    var tt = ss.codeUnits;
-    var signature = base64.encode(tt);
-    return signature;
+  Future<List<WalletTransactionModel>> getWalletHistory() async {
+    var list = await sl<FirebaseFunctions>()
+        .httpsCallable('getAllTransactions')
+        .call({"eWalletID": sl<HiveHelper>().getWalletFromBox()!.id});
+    var itemsList = (list as List);
+
+    return List.generate(itemsList.length,
+        (index) => WalletTransactionModel.fromMap(itemsList[index]));
   }
 }

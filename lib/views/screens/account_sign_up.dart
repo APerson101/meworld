@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:group_button/group_button.dart';
 import 'package:meworld/core/models/user_account_model.dart';
 import 'package:meworld/core/repository/db_helper.dart';
+import 'package:meworld/core/repository/rapyd_helper.dart';
 import 'package:meworld/core/services/service_locator.dart';
 import 'package:meworld/views/screens/authentication/signup_view.dart';
 import 'package:meworld/views/screens/business%20forms/freelancer_form_view.dart';
@@ -29,11 +30,11 @@ class AccountSignUp extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          const Text("Sign up as: "),
+          const Text("Continue as a:"),
           ToggleSwitch(
             initialLabelIndex: ref.watch(selectedType),
             totalSwitches: 2,
-            labels: const ['Business', 'User'],
+            labels: const ['User', 'Business'],
             onToggle: (selected) {
               selected != null
                   ? ref.watch(selectedType) != selected
@@ -76,6 +77,8 @@ class UserSignUpView extends StatelessWidget {
         ),
         ElevatedButton(
             onPressed: () async {
+              // GoRouter.of(context).push('/');
+              // return;
               var user = sl<FirebaseAuth>().currentUser;
               assert(user != null);
               var status = await sl<Database>().createUserAccount(
@@ -91,9 +94,22 @@ class UserSignUpView extends StatelessWidget {
                       title: Text("Unable to create, try again later"),
                     )));
                   });
-              if (status) GoRouter.of(context).go('/');
+
+              if (status) {
+                var wallet = await sl<RapydAPI>().createWallet({
+                  'first_name': 'sample_first_name',
+                  'last_name': 'sample_last_name',
+                  'userid': user.uid,
+                  'type': 'person'
+                });
+                // create wallet
+                print('done creating....');
+                wallet
+                    ? GoRouter.of(context).push('/')
+                    : print('wallet creation false');
+              }
             },
-            child: const Text("Skip for now"))
+            child: const Text("Continue"))
       ],
     );
   }

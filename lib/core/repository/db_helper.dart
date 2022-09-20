@@ -42,7 +42,7 @@ class Database {
     }
   }
 
-  createUserAccount(
+  Future<bool> createUserAccount(
       {required UserAccountModel account,
       required void Function() error}) async {
     try {
