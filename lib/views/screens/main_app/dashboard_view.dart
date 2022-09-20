@@ -387,7 +387,7 @@ class _ShowCreditCardFormState extends State<ShowCreditCardForm> {
                       child: Container(
                         margin: const EdgeInsets.all(12),
                         child: const Text(
-                          'Validate',
+                          'Fund Wallet',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'halter',
@@ -415,6 +415,9 @@ class _ShowCreditCardFormState extends State<ShowCreditCardForm> {
                                         content: ListTile(
                                   title: Text("Successfully funded Wallet"),
                                 )));
+                                Future.delayed(const Duration(seconds: 3), () {
+                                  GoRouter.of(context).pop();
+                                });
                               });
                           debugPrint('valid!');
                         } else {
