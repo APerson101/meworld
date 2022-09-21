@@ -410,11 +410,11 @@ class _ShowCreditCardFormState extends State<ShowCreditCardForm> {
                                 )));
                               },
                               success: () {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
                                         content: ListTile(
-                                  title: Text("Successfully funded Wallet"),
-                                )));
+                                            title: Text(
+                                                "Successfully funded Wallet"))));
                                 Future.delayed(const Duration(seconds: 3), () {
                                   GoRouter.of(context).pop();
                                 });
