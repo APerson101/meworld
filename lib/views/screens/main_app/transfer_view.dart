@@ -42,8 +42,9 @@ class TransferView extends ConsumerWidget {
                                           padding: const EdgeInsets.all(15.0),
                                           child: ListTile(
                                             onTap: () {
-                                              GoRouter.of(context)
-                                                  .push('/amountpage');
+                                              GoRouter.of(context).push(
+                                                  '/amountpage',
+                                                  extra: contact);
                                             },
                                             title: Text(contact.name),
                                             subtitle: Text(contact.eWalletID),

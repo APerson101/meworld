@@ -43,6 +43,7 @@ export const removeFundsFromWallet = functions.https.onCall(async (request) => {
 });
 
 
+
 export const loadWallet = functions.https.onCall(async (request) => {
   const userID = request["body"]["eWalletID"];
   const path = baseURL + `user/${userID}`;
@@ -58,7 +59,7 @@ export const retrieveWalletBalances = functions.https.onCall(async (request) => 
   const headers = header.getHeader(null, path, "get");
   const userWalletBalance = await ah.getRequest(path, headers);
   console.log(userWalletBalance);
-  return userWalletBalance.data;
+  return userWalletBalance;
 });
 
 export const walletTransferRequest = functions.https.onCall(async (request) => {

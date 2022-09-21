@@ -45,13 +45,18 @@ class RapydAPI {
 
     var loadUser = await sl<Database>().getUser();
 
-    var list = response.data as List;
-    return List.generate(
-      list.length,
-      (index) => WalletBalanceModel.fromMap(
-        list[index],
-      ),
-    );
+    print(response);
+    if (response.data != null) {
+      var list = response.data as List;
+      return List.generate(
+        list.length,
+        (index) => WalletBalanceModel.fromMap(
+          list[index]['data'],
+        ),
+      );
+    } else {
+      return [];
+    }
   }
 
   fundWallet(

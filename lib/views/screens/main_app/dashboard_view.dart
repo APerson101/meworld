@@ -236,7 +236,7 @@ class DashBoardCards extends StatelessWidget {
 
 final loadWalletBalanceProvider =
     FutureProvider.family<List<WalletBalanceModel>, String>((ref, id) async {
-  log('getting balance for id: $id');
+  debugPrint('getting balance for id: $id');
   return await sl<RapydAPI>().loadWalletBalance(id: id);
 });
 

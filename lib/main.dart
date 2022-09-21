@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:meworld/core/models/user_account_model.dart';
 import 'package:meworld/core/services/service_locator.dart';
 import 'package:meworld/views/screens/authentication/login_view.dart';
 import 'package:meworld/views/screens/authentication/reset_password_view.dart';
@@ -161,7 +162,9 @@ class MyApp extends ConsumerWidget {
           builder: (context, state) => const EcommerceView()),
       GoRoute(
           path: '/amountpage',
-          builder: (context, state) => const TranferAmountView()),
+          builder: (context, state) => TranferAmountView(
+                contact: (state.extra) as ContactsModel,
+              )),
     ],
   );
 }
