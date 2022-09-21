@@ -13,7 +13,7 @@ export const createWallet = functions.https.onCall(async (request) => {
     url: fullPath, headers: headers, body: body,
   };
   const response = await ah.postRequest(req);
-  console.log(response);
+  // console.log(response);
   return response;
 });
 

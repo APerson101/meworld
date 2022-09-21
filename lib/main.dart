@@ -19,8 +19,10 @@ import 'package:meworld/views/screens/main_app/main_app_view.dart';
 import 'package:meworld/views/screens/main_app/settings_view.dart';
 import 'package:meworld/views/screens/main_app/sports/sports_search_view.dart';
 import 'package:meworld/views/screens/main_app/sports/sports_view.dart';
+import 'package:meworld/views/screens/main_app/transfer_amount_page.dart';
 
 import 'firebase_options.dart';
+import 'views/qrcodeview.dart';
 import 'views/screens/business forms/gym_form_view.dart';
 import 'views/screens/create_sports_event.dart';
 import 'views/screens/main_app/account_info_view.dart';
@@ -103,6 +105,10 @@ class MyApp extends ConsumerWidget {
         builder: (context, state) => const SportsView(),
       ),
       GoRoute(
+        path: '/qrcodepage',
+        builder: (context, state) => const QrCodeView(),
+      ),
+      GoRoute(
         path: '/SignUp',
         builder: (context, state) => SignUpView(),
       ),
@@ -153,6 +159,9 @@ class MyApp extends ConsumerWidget {
       GoRoute(
           path: '/ECommerceView',
           builder: (context, state) => const EcommerceView()),
+      GoRoute(
+          path: '/amountpage',
+          builder: (context, state) => const TranferAmountView()),
     ],
   );
 }

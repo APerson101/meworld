@@ -12,6 +12,9 @@ import 'package:meworld/core/models/rapydwallet.dart';
 import 'package:meworld/core/repository/hive_helper.dart';
 import 'package:meworld/core/repository/rapyd_helper.dart';
 import 'package:meworld/core/services/service_locator.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'transfer_view.dart';
 
 final currentPage = StateProvider((ref) => 0);
 
@@ -102,9 +105,14 @@ class DashboardView extends ConsumerWidget {
                             title: 'ADD',
                           ),
                           WalletBalanceWidgets(
-                            icon: Icons.remove,
-                            title: 'REMOVE',
-                            onTap: () {},
+                            icon: Icons.send,
+                            title: 'TRANSFER',
+                            onTap: () {
+                              //
+                              showMaterialModalBottomSheet(
+                                  context: context,
+                                  builder: ((context) => const TransferView()));
+                            },
                           ),
                           WalletBalanceWidgets(
                             icon: Icons.history,

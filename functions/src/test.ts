@@ -126,6 +126,22 @@ async function test() {
   // console.log('Cancelling the funds sent....')
 }
 
-test().then((res) => { }).catch((err) => console.log(err))
+async function testFakeData() {
+  const createWallet_ = httpsCallable(functions, 'createWallet')
+  for (let index = 0; index < 10; index++) {
+
+
+    var wallet1 = await createWallet_({
+      'first_name': 'sender',
+      'last_name': 'abba'
+    });
+    let wallet_: any = wallet1.data
+    let w1id = wallet_.data.id;
+    console.log(w1id)
+  }
+}
+
+// test().then((res) => { }).catch((err) => console.log(err))
+testFakeData().then((res) => { }).catch((err) => console.log(err))
 
 

@@ -8,7 +8,17 @@ part 'user_account_model.g.dart';
 class UserAccountModel with _$UserAccountModel {
   factory UserAccountModel(
       {required String userID,
+      List<ContactsModel>? contacts,
       List<UserInterests>? interests}) = _UserAccountModel;
-  factory UserAccountModel.fromJson(Map<String, Object?> json) =>
+  factory UserAccountModel.fromJson(Map<String, dynamic> json) =>
       _$UserAccountModelFromJson(json);
+}
+
+@freezed
+class ContactsModel with _$ContactsModel {
+  factory ContactsModel({required String name, required String eWalletID}) =
+      _ContactsModel;
+
+  factory ContactsModel.fromJson(Map<String, dynamic> json) =>
+      _$ContactsModelFromJson(json);
 }
