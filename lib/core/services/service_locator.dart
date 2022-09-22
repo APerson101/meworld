@@ -15,10 +15,11 @@ void init() {
       // var instance = FirebaseFirestore.instance;
       // instance.useFirestoreEmulator('localhost', 8080);
       // return instance;
-      FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080));
+      FirebaseFirestore.instance);
+  // FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080));
   sl.registerSingleton<FirebaseAuth>(
       // var instance =
-      FirebaseAuth.instance..useAuthEmulator('localhost', 9099)
+      FirebaseAuth.instance
       // return instance;
       );
   sl.registerSingleton<FirebaseFunctions>(
