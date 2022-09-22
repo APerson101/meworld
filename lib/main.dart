@@ -27,7 +27,6 @@ import 'views/qrcodeview.dart';
 import 'views/screens/business forms/gym_form_view.dart';
 import 'views/screens/create_sports_event.dart';
 import 'views/screens/main_app/account_info_view.dart';
-import 'views/screens/main_app/dashboard_view.dart';
 import 'views/screens/main_app/dashboardwidgets/txnswalletview.dart';
 
 // DEBUG=backend:* npm start
@@ -88,14 +87,14 @@ class MyApp extends ConsumerWidget {
 
   final _router = GoRouter(
     routes: [
-      // GoRoute(
-      //   path: '/',
-      //   builder: (context, state) => const LaunchApp(),
-      // ),
       GoRoute(
         path: '/',
-        builder: (context, state) => const ShowCreditCardForm(),
+        builder: (context, state) => const LaunchApp(),
       ),
+      // GoRoute(
+      //   path: '/',
+      //   builder: (context, state) => const ShowCreditCardForm(),
+      // ),
       GoRoute(
         path: '/StoreForm',
         builder: (context, state) => EcommerceFormView(
