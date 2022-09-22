@@ -290,7 +290,6 @@ class _ShowCreditCardFormState extends State<ShowCreditCardForm> {
               expiryDate: expiryDate,
               cardHolderName: cardHolderName,
               cvvCode: cvvCode,
-              bankName: 'Axis Bank',
               showBackView: isCvvFocused,
               obscureCardNumber: true,
               obscureCardCvv: true,
@@ -325,34 +324,34 @@ class _ShowCreditCardFormState extends State<ShowCreditCardForm> {
                       cardHolderName: cardHolderName,
                       expiryDate: expiryDate,
                       themeColor: Colors.blue,
-                      textColor: Colors.white,
+                      textColor: Colors.black,
                       cardNumberDecoration: InputDecoration(
                         labelText: 'Number',
                         hintText: 'XXXX XXXX XXXX XXXX',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.black),
+                        labelStyle: const TextStyle(color: Colors.black),
                         focusedBorder: border,
                         enabledBorder: border,
                       ),
                       expiryDateDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.black),
+                        labelStyle: const TextStyle(color: Colors.black),
                         focusedBorder: border,
                         enabledBorder: border,
                         labelText: 'Expired Date',
                         hintText: 'XX/XX',
                       ),
                       cvvCodeDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.black),
+                        labelStyle: const TextStyle(color: Colors.black),
                         focusedBorder: border,
                         enabledBorder: border,
                         labelText: 'CVV',
                         hintText: 'XXX',
                       ),
                       cardHolderDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.black),
+                        labelStyle: const TextStyle(color: Colors.black),
                         focusedBorder: border,
                         enabledBorder: border,
                         labelText: 'Card Holder',
@@ -361,27 +360,6 @@ class _ShowCreditCardFormState extends State<ShowCreditCardForm> {
                     ),
                     const SizedBox(
                       height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Card Image',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Switch(
-                          value: useBackgroundImage,
-                          inactiveTrackColor: Colors.grey,
-                          activeColor: Colors.white,
-                          activeTrackColor: Colors.green,
-                          onChanged: (bool value) => setState(() {
-                            useBackgroundImage = value;
-                          }),
-                        ),
-                      ],
                     ),
                     const SizedBox(
                       height: 20,
