@@ -22,8 +22,7 @@ void init() {
       FirebaseAuth.instance
       // return instance;
       );
-  sl.registerSingleton<FirebaseFunctions>(
-      FirebaseFunctions.instance..useFunctionsEmulator('localhost', 5001));
+  sl.registerSingleton<FirebaseFunctions>(FirebaseFunctions.instance);
   sl.registerFactory<AuthenticationRepo>(() => AuthenticationRepo());
   sl.registerSingleton<Database>(Database(store: sl.get<FirebaseFirestore>()));
   sl.registerSingleton<HiveHelper>(HiveHelper());

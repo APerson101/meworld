@@ -51,10 +51,7 @@ class MyApp extends ConsumerWidget {
       blendLevel: 20,
       appBarOpacity: 0.95,
       subThemesData: const FlexSubThemesData(
-        interactionEffects: false,
-        blendOnLevel: 20,
-        blendOnColors: false,
-      ),
+          interactionEffects: false, blendOnLevel: 20, blendOnColors: false),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       fontFamily: GoogleFonts.notoSans().fontFamily,
     );
@@ -64,10 +61,8 @@ class MyApp extends ConsumerWidget {
       blendLevel: 15,
       appBarStyle: FlexAppBarStyle.background,
       appBarOpacity: 0.90,
-      subThemesData: const FlexSubThemesData(
-        interactionEffects: false,
-        blendOnLevel: 30,
-      ),
+      subThemesData:
+          const FlexSubThemesData(interactionEffects: false, blendOnLevel: 30),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       fontFamily: GoogleFonts.notoSans().fontFamily,
     );
@@ -162,9 +157,8 @@ class MyApp extends ConsumerWidget {
           builder: (context, state) => const EcommerceView()),
       GoRoute(
           path: '/amountpage',
-          builder: (context, state) => TranferAmountView(
-                contact: (state.extra) as ContactsModel,
-              )),
+          builder: (context, state) =>
+              TranferAmountView(contact: (state.extra) as ContactsModel)),
     ],
   );
 }
